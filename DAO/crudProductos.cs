@@ -24,7 +24,42 @@ namespace TareaSemana8.DAO
                 Console.WriteLine("¡¡Su Producto Fue Ingresado Exitosamente!!");
             }
         }
+        public List<Producto> Listar()
+        {
+            using (AlmacenContext db = new AlmacenContext())
+            {
+                var lista = db.Productos.ToList();
+                return lista;
+            }
+        }
+        public Producto Validar(Producto paramProducto)
+        {
+            using (AlmacenContext db = new AlmacenContext())
+            {
+                var buscar = db.Productos.FirstOrDefault(x => x.Id == paramProducto.Id);
+                return buscar;
+            }
+        }
+
+        public void Actualizar(Producto paramProducto)
+        {
+            using (AlmacenContext db = new AlmacenContext())
+            {
+                db.Update(paramProducto);
+                db.SaveChanges();
+            }
+        }
+        public void Eliminar(Producto paramProducto)
+        {
+            using (AlmacenContext db = new AlmacenContext())
+            {
+                db.Remove(paramProducto);
+                db.SaveChanges();
+            }
+
+        }
     }
+
 }
-    
+        
 
